@@ -3,10 +3,17 @@ import styles from './Comment.module.css';
 import { Avatar } from './Avatar';
 
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 export function Comment({ content, onDeleteComment }) {
+    const [LikeCount, setLikeCount] = useState(0);
+
     function handleDeletComment() {
         onDeleteComment(content);
+    }
+
+    function handleLikeComment() {
+        setLikeCount(LikeCount + 1);
     }
 
     return(
@@ -31,9 +38,9 @@ export function Comment({ content, onDeleteComment }) {
                 </div>
 
                 <footer>
-                    <button>
+                    <button onClick={handleLikeComment}>
                         <ThumbsUp />
-                        Aplaudir <span>20</span>
+                        Aplaudir <span>{LikeCount}</span>
                     </button>
                 </footer>
             </div>
@@ -42,4 +49,5 @@ export function Comment({ content, onDeleteComment }) {
 }
 Comment.propTypes = {
     content: PropTypes.string.isRequired,
+    onDeleteComment: PropTypes.func.isRquired,
   };
