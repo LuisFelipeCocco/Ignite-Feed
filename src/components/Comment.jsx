@@ -6,14 +6,16 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 export function Comment({ content, onDeleteComment }) {
-    const [LikeCount, setLikeCount] = useState(0);
+    const [likeCount, setLikeCount] = useState(0);
 
     function handleDeletComment() {
         onDeleteComment(content);
     }
 
     function handleLikeComment() {
-        setLikeCount(LikeCount + 1);
+        setLikeCount((state) => {
+            return state + 1
+        });
     }
 
     return(
@@ -40,7 +42,7 @@ export function Comment({ content, onDeleteComment }) {
                 <footer>
                     <button onClick={handleLikeComment}>
                         <ThumbsUp />
-                        Aplaudir <span>{LikeCount}</span>
+                        Aplaudir <span>{likeCount}</span>
                     </button>
                 </footer>
             </div>
